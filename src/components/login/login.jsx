@@ -11,9 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import myimage from './logo.png';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import axiosinstance from '../axiosconfig';
 const defaultTheme = createTheme();
 const Login = () => {
     const navigate = useNavigate();
@@ -29,7 +28,7 @@ const Login = () => {
     }
 };
         const checkemail =(e)=>{
-                axios.get(`http://localhost:4000/users/checkemail?email=${e.target.value.trim()}`, {
+          axiosinstance.get(`/users/checkemail?email=${e.target.value.trim()}`, {
                   headers: {'content-type': 'application/json'}
                 })
                 .then(res=>{
@@ -42,8 +41,8 @@ const Login = () => {
 
         const handleSubmit = (e) => {
           e.preventDefault();
-          axios
-            .post('http://localhost:4000/users/login', userdata, {
+          axiosinstance
+            .post('/users/login', userdata, {
               headers: { 'Content-Type': 'application/json' },
               withCredentials: true,
             })

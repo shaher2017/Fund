@@ -15,9 +15,9 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import"./register.css";
+import axiosinstance from '../axiosconfig';
 const defaultTheme = createTheme();
 
 const Register = () => {
@@ -39,7 +39,7 @@ const Register = () => {
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         if (e.target.value.trim() === "" || !emailRegex.test(e.target.value.trim())){
           setUserError({...userError, email: "Enter Valid Email"});
-          axios.get(`http://localhost:4000/users/checkemail?email=${e.target.value.trim()}`, {
+          axiosinstance.get(`/users/checkemail?email=${e.target.value.trim()}`, {
             headers: { 'content-type': 'application/json' }
           })
           .then(res=>{
@@ -78,7 +78,7 @@ const Register = () => {
     }
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post("http://localhost:4000/users/register",userData,{headers:{"Content-Type":"application/json"}})
+    axiosinstance.post("/users/register",userData,{headers:{"Content-Type":"application/json"}})
     .then((response) => {
       if (response.status === 201) {
         navigate("/projects");

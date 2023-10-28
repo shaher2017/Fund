@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar/navbar";
-import Addproject from "./components/addproject/addproject";
-import Register from "./components/register/register";
-import Projects from "./components/projects/projects";
-import Login from "./components/login/login";
-import Editproject from "./components/editproject/editproject";
-import Favorites from "./components/favorites/favorites";
-import Aboutus from "./components/aboutus/aboutus";
+
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
-import Details from "./components/details/details";
-import Footer from "./components/footer/footer";
 import { Amount } from "./components/paycontext/paycontext";
-import Paying from "./components/paying/paying";
-import Funds from "./components/funds/funds";
+import Loader from "./components/loader/loader";
+
+const Navbar = React.lazy(() => import("./components/navbar/navbar"));
+const Addproject = React.lazy(() =>
+  import("./components/addproject/addproject")
+);
+const Register = React.lazy(() => import("./components/register/register"));
+const Projects = React.lazy(() => import("./components/projects/projects"));
+const Notfound = React.lazy(() => import("./components/notfound/notfound"));
+const Login = React.lazy(() => import("./components/login/login"));
+const Editproject = React.lazy(() =>
+  import("./components/editproject/editproject")
+);
+const Aboutus = React.lazy(() => import("./components/aboutus/aboutus"));
+const Details = React.lazy(() => import("./components/details/details"));
+const Footer = React.lazy(() => import("./components/footer/footer"));
+const Paying = React.lazy(() => import("./components/paying/paying"));
+const Favorites = React.lazy(() => import("./components/favorites/favorites"));
+const Funds = React.lazy(() => import("./components/funds/funds"));
 function App() {
   const [amount, setAmountcon] = useState(0);
   const [projectid, setProjectid] = useState("");
@@ -28,35 +36,38 @@ function App() {
     <PayPalScriptProvider options={initialOptions}>
       <BrowserRouter>
         <div className="App">
-          <Navbar
-            setOnlyuserprojects={setOnlyuserprojects}
-            onlyuserprojects={onlyuserprojects}
-          />
-          <Amount.Provider
-            value={{ amount, setAmountcon, projectid, setProjectid }}
-          >
-            <Routes>
-              <Route
-                path="/"
-                element={<Projects onlyuserprojects={onlyuserprojects} />}
-              />
-              <Route
-                path="/projects"
-                element={<Projects onlyuserprojects={onlyuserprojects} />}
-              />
-              <Route path="/addproject" element={<Addproject />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/project/:id" element={<Editproject />} />
-              <Route path="/favorites" element={<Favorites />} />
-              <Route path="/aboutus" element={<Aboutus />} />
+          <Suspense fallback={<Loader />}>
+            <Navbar
+              setOnlyuserprojects={setOnlyuserprojects}
+              onlyuserprojects={onlyuserprojects}
+            />
+            <Amount.Provider
+              value={{ amount, setAmountcon, projectid, setProjectid }}
+            >
+              <Routes>
+                <Route
+                  path="/"
+                  element={<Projects onlyuserprojects={onlyuserprojects} />}
+                />
+                <Route
+                  path="/projects"
+                  element={<Projects onlyuserprojects={onlyuserprojects} />}
+                />
+                <Route path="/addproject" element={<Addproject />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/project/:id" element={<Editproject />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/aboutus" element={<Aboutus />} />
 
-              <Route path="/details/:id" element={<Details />} />
-              <Route path="/paying" element={<Paying />} />
-              <Route path="/funds" element={<Funds />} />
-            </Routes>
-          </Amount.Provider>
-          <Footer />
+                <Route path="/details/:id" element={<Details />} />
+                <Route path="/paying" element={<Paying />} />
+                <Route path="/funds" element={<Funds />} />
+                <Route path="/*" element={<Notfound />} />
+              </Routes>
+            </Amount.Provider>
+            <Footer />
+          </Suspense>
         </div>
       </BrowserRouter>
     </PayPalScriptProvider>

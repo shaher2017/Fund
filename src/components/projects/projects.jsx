@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect} from 'react';
 import Projectcard from '../projectcard/projectcard';
 import "./projects.css";
@@ -6,7 +5,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 import { useSelector } from 'react-redux';
-
+import axiosinstance from '../axiosconfig';
 const Projects = ({onlyuserprojects}) => {
 
   const selector = useSelector(state=>state.thelist);
@@ -20,14 +19,14 @@ const Projects = ({onlyuserprojects}) => {
   const fetchProjects = async (page) => {
     if(!onlyuserprojects)
    { try {
-      const response = await axios.get(`http://localhost:4000/projects/allprojects?page=${page}`);
+      const response = await axiosinstance.get(`/projects/allprojects?page=${page}`);
       setProjects(response.data.projects);
       setMaxPages(response.data.pagesno);
     } catch (error) {
       console.error('Error fetching projects:', error);
     }
     if (localStorage.getItem("username")) {
-      axios.get("http://localhost:4000/users/userprojects", {
+      axiosinstance.get("/users/userprojects", {
         headers: { "Content-Type": "application/json" },
         withCredentials: true
       })
@@ -40,7 +39,7 @@ const Projects = ({onlyuserprojects}) => {
     }}
     else{
       if (localStorage.getItem("username")) {
-        axios.get("http://localhost:4000/users/userprojects", {
+        axiosinstance.get("/users/userprojects", {
           headers: { "Content-Type": "application/json" },
           withCredentials: true
         })

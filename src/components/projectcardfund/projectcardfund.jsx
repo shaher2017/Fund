@@ -15,7 +15,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import {addProject, deleteProject} from "../redux/liked";
 import ProgressBar from "@ramonak/react-progress-bar";
@@ -48,26 +47,7 @@ const Projectcard = (props) => {
     }
   }
 
-  const editing =()=>{
-    navigate(`/project/${props.project._id}`);
-  }
-  const deleting = () => {
-    axios
-      .delete(`http://localhost:4000/projects/deleteproject?id=${props.project._id}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      })
-      .then(() => {
-        dispatch(deleteProject(props.project._id));
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
   
-
   let thecolor = selector.includes(props.project._id) ? "red":"gray";
   const favorites = () => {
     if(selector.includes(props.project._id)){

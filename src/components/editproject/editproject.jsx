@@ -7,8 +7,8 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import { useParams, useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import axios from 'axios';
 import "./editproject.css";
+import axiosinstance from '../axiosconfig';
 const Editproject = () => {
   const navigate = useNavigate();
     const param = useParams();
@@ -23,7 +23,7 @@ const Editproject = () => {
 
       useEffect(() => {
         const projectid = param.id;
-        axios.get(`http://localhost:4000/projects/projectdata?projectid=${projectid}`, {
+        axiosinstance.get(`/projects/projectdata?projectid=${projectid}`, {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -72,8 +72,8 @@ const Editproject = () => {
       };
 
       const deleting = () => {
-        axios
-          .delete(`http://localhost:4000/projects/deleteproject?id=${param.id}`, {
+        axiosinstance
+          .delete(`/projects/deleteproject?id=${param.id}`, {
             headers: {
               'Content-Type': 'application/json',
             },
@@ -89,7 +89,7 @@ const Editproject = () => {
      
       const editing = ()=>{
         if(projectdataerr.name === '' || projectdataerr.funds === ''){
-          axios.patch("http://localhost:4000/projects/updateproject",{projectdata:projectdata, id : param.id},
+          axiosinstance.patch("/projects/updateproject",{projectdata:projectdata, id : param.id},
           {headers: {'Content-Type': 'application/json'}, withCredentials: true})
           .then(()=>{navigate(`/projects`)})
           .catch((error)=>{console.log(error)});
@@ -111,7 +111,7 @@ const Editproject = () => {
         component="img"
         height="294"
         width="394"
-        image={`http://localhost:4000/${project.image}`}
+        image={`${process.env.REACT_APP_BASE_URL}/${project.image}`}
         alt=""
       />
 <div style={{ display: "flex", width: "100%", justifyContent: "space-around", marginTop:"1rem", marginBottom:"1rem" }}>

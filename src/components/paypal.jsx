@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router-dom';
 const PayPalButton = (props) => {
   const navigate = useNavigate();
   const [show,setShow] = useState(false);
-  const serverurl = "http://localhost:4000";
 
   const createOrder = (data) => {
-    return fetch(`${serverurl}/api/orders`, {
+    return fetch(`${process.env.REACT_APP_BASE_URL}/api/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +26,7 @@ const PayPalButton = (props) => {
   };
 
   const onApprove = (data) => {
-    return fetch(`${serverurl}/api/orders/${data.orderID}/capture/${props.id}/${props.amount}`, {
+    return fetch(`$${process.env.REACT_APP_BASE_URL}/api/orders/${data.orderID}/capture/${props.id}/${props.amount}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

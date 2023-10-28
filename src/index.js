@@ -9,8 +9,10 @@ import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 let persistor = persistStore(store);
 
+if (process.env.NODE_ENV !== "production") disableReactDevTools();
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>

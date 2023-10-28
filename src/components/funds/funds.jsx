@@ -1,9 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import Projectcard from '../projectcardfund/projectcardfund';
-import { useNavigate } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
-import axios from 'axios';
-
+import axiosinstance from '../axiosconfig';
 const Funds = () => {
   
     const [projects, setProjects] = useState([]);
@@ -11,13 +9,13 @@ const Funds = () => {
     const [maxpages, setMaxPages] = useState();
   
     useEffect(()=>{
-        axios.get(`http://localhost:4000/projects/getuserfunds?page=${currentPage}`,{
+      axiosinstance.get(`/projects/getuserfunds?page=${currentPage}`,{
             headers: { "Content-Type": "application/json" },
             withCredentials: true
           }).then(response=>{setProjects(response.data.projects);setMaxPages(response.data.pagesno);
              console.log(response.data.pagesno)})
           .catch(err=>{console.log(err);});
-    },[])
+    },[currentPage])
   
     const handleChange = (event, value) => {
       setCurrentPage(value);

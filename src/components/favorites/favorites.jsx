@@ -1,15 +1,14 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Projectcard from '../projectcard/projectcard';
 import { useSelector } from 'react-redux';
-
+import axiosinstance from '../axiosconfig';
 const Favorites = () => {
     const selector = useSelector(state=>state.thelist);
     const [projects, setProjects] = useState([
        
     ]);
 
-    useEffect(()=>{ axios.post("http://localhost:4000/projects/favprojects",selector,
+    useEffect(()=>{ axiosinstance.post("/projects/favprojects",selector,
     {headers: {'Content-Type': 'application/json'},
     withCredentials: true}).then((response)=>{setProjects(response.data.projects)}).catch((error)=>{console.log(error);});
 },[selector])
@@ -17,7 +16,7 @@ const Favorites = () => {
 
     useEffect(() => {
       if (localStorage.getItem("username")) {
-        axios.get("http://localhost:4000/users/userprojects", {
+        axiosinstance.get("/users/userprojects", {
           headers: { "Content-Type": "application/json" },
           withCredentials: true
         })

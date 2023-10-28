@@ -15,11 +15,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import {addProject, deleteProject} from "../redux/liked";
 import ProgressBar from "@ramonak/react-progress-bar";
-
+import axiosinstance from '../axiosconfig';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -52,8 +51,8 @@ const Projectcard = (props) => {
     navigate(`/project/${props.project._id}`);
   }
   const deleting = () => {
-    axios
-      .delete(`http://localhost:4000/projects/deleteproject?id=${props.project._id}`, {
+    axiosinstance
+      .delete(`/projects/deleteproject?id=${props.project._id}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -99,7 +98,7 @@ const Projectcard = (props) => {
       <CardMedia
         component="img"
         height="194"
-        image={`http://localhost:4000/${props.project.image}`}
+        image={`${process.env.REACT_APP_BASE_URL}/${props.project.image}`}
         alt=""
       />
 <div style={{ display: "flex", width: "100%", justifyContent: "space-around", marginTop:"1rem" }}>

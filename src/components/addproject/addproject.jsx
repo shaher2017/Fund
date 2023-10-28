@@ -1,6 +1,4 @@
-import axios from 'axios';
 import React, { useState } from 'react'
-
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -10,6 +8,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import axiosinstance from '../axiosconfig';
 import "./addproject.css";
 const Addproject = () => {
   const navigate = useNavigate();
@@ -58,8 +57,8 @@ const Addproject = () => {
     formData.append("image", project.image);
     formData.append("description", project.description);
   
-    axios
-      .post('http://localhost:4000/projects/addproject', formData, {
+    axiosinstance
+      .post('/projects/addproject', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

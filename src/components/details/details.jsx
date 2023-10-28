@@ -5,11 +5,10 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import {Amount} from "../paycontext/paycontext";
 import ProgressBar from "@ramonak/react-progress-bar";
-
+import axiosinstance from '../axiosconfig';
 const Details = () => {
   const { setAmountcon, setProjectid } = useContext(Amount);
     const [project,setProject] = useState({title:"",image:"",description:"",funds:"",collected:""});
@@ -39,7 +38,7 @@ const Details = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/projects/projectdata?projectid=${param.id}`, {
+      axiosinstance.get(`/projects/projectdata?projectid=${param.id}`, {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -67,7 +66,7 @@ const Details = () => {
       component="img"
       height="294"
       width="394"
-      image={`http://localhost:4000/${project.image}`}
+      image={`${process.env.REACT_APP_BASE_URL}/${project.image}`}
       alt=""
     />
 <div style={{ textAlign:"center", display: "flex", width: "100%", justifyContent: "space-around",
