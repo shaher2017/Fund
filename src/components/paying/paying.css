@@ -1,0 +1,20 @@
+.paying-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+    width: fit-content;
+    border: 2px solid black;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 25%;
+    margin-left: 35%;
+    height: 29rem;
+    width: 28rem;
+}
+.paying-content p{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}

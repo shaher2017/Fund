@@ -1,0 +1,99 @@
+
+.about-us {
+    text-align: center;
+    margin: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  
+  
+  .about-us img {
+    max-width: 100%;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .about-us h2 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .about-us .social-links {
+    margin: 10px 0;
+  }
+  
+  .about-us .social-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #0077b5; 
+  }
+  
+  .about-us .social-links a:hover {
+    color: #333; 
+  }
+  
+  .about-us button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .about-us button:hover {
+    background-color: #555; 
+  }
+  
+  .about-us p {
+    font-size: 16px;
+  }
+  .about-content{
+    font-weight: bold;
+    text-align: left;
+    width: 40%;
+  }
+  .about-content h1{
+    font-size: 3.3rem;
+    margin: 0;
+  }
+  .about-content h2{
+    font-size: 2.3rem;
+  }
+  .about-content h3{
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  .about-content h4{
+    font-size: 1.2rem;
+    text-align: justify;
+    font-weight: 400;
+    border: 2px solid black;
+    border-radius: 10%;
+    padding: 2rem;
+  }
+  .about-content h5{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+
+  }
+  @media (max-width: 768px) {
+    .about-us {
+      flex-direction: column;
+    }
+    .about-content{
+        text-align: center;
+    }
+
+  }
+  .social-links a{
+    font-size: 22px;
+  }
+  .skills{
+    border: 2px solid black;
+    border-radius: 10%;
+    padding: 1rem;
+  }
