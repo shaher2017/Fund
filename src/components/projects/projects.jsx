@@ -27,7 +27,7 @@ const Projects = ({onlyuserprojects}) => {
     }
     if (localStorage.getItem("username")) {
       axiosinstance.get("/users/userprojects", {
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",'Authorization': `${localStorage.getItem("fund-token")}` },
         withCredentials: true
       })
         .then((response) => {
@@ -40,7 +40,7 @@ const Projects = ({onlyuserprojects}) => {
     else{
       if (localStorage.getItem("username")) {
         axiosinstance.get("/users/userprojects", {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json",'Authorization': `${localStorage.getItem("fund-token")}` },
           withCredentials: true
         })
           .then((response) => {
@@ -53,7 +53,7 @@ const Projects = ({onlyuserprojects}) => {
       }
     }
   };
-
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     fetchProjects(currentPage);
   }, [currentPage,selector,onlyuserprojects]);

@@ -11,6 +11,7 @@ const PayPalButton = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `${localStorage.getItem("fund-token")}`,
       },
       credentials: "include",
       body: JSON.stringify({ id: props.id, amount: Number(props.amount) }),
@@ -30,6 +31,7 @@ const PayPalButton = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `${localStorage.getItem("fund-token")}`,
       },
       credentials: "include",
     })

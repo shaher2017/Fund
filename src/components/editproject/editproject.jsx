@@ -20,12 +20,13 @@ const Editproject = () => {
         const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
         return new Date(dateString).toLocaleDateString(undefined, options);
       };
-
+  /* eslint-disable react-hooks/exhaustive-deps */
       useEffect(() => {
         const projectid = param.id;
         axiosinstance.get(`/projects/projectdata?projectid=${projectid}`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${localStorage.getItem("fund-token")}`,
           },
           withCredentials: true
         })
@@ -76,6 +77,7 @@ const Editproject = () => {
           .delete(`/projects/deleteproject?id=${param.id}`, {
             headers: {
               'Content-Type': 'application/json',
+              'Authorization': `${localStorage.getItem("fund-token")}`,
             },
             withCredentials: true,
           })

@@ -17,7 +17,6 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector } from 'react-redux';
-import axiosinstance from '../axiosconfig';
 
 const theme = createTheme();
 
@@ -52,9 +51,10 @@ const Navbar = ({setOnlyuserprojects,onlyuserprojects}) => {
     };
 
     const logout = ()=>{
-      axiosinstance.get("/users/logout",{headers:{"Content-Type":"application/json"},withCredentials:true})
-      .then(()=>{localStorage.clear();navigate("/login")})
-      .catch((err)=>{console.log(err)});
+
+localStorage.clear();
+navigate("/login");
+
     }
 
   return (

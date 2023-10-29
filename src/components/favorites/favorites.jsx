@@ -9,7 +9,7 @@ const Favorites = () => {
     ]);
 
     useEffect(()=>{ axiosinstance.post("/projects/favprojects",selector,
-    {headers: {'Content-Type': 'application/json'},
+    {headers: {'Content-Type': 'application/json','Authorization': `${localStorage.getItem("fund-token")}`},
     withCredentials: true}).then((response)=>{setProjects(response.data.projects)}).catch((error)=>{console.log(error);});
 },[selector])
     const [projectsid,setProjectsid] = useState([]);
@@ -17,7 +17,7 @@ const Favorites = () => {
     useEffect(() => {
       if (localStorage.getItem("username")) {
         axiosinstance.get("/users/userprojects", {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" ,'Authorization': `${localStorage.getItem("fund-token")}`,},
           withCredentials: true
         })
           .then((response) => {

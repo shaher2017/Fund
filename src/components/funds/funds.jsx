@@ -10,7 +10,7 @@ const Funds = () => {
   
     useEffect(()=>{
       axiosinstance.get(`/projects/getuserfunds?page=${currentPage}`,{
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json",'Authorization': `${localStorage.getItem("fund-token")}` },
             withCredentials: true
           }).then(response=>{setProjects(response.data.projects);setMaxPages(response.data.pagesno);
              console.log(response.data.pagesno)})

@@ -48,7 +48,7 @@ const Login = () => {
             })
             .then((response) => {
               if (response.status === 201) {
-                localStorage.setItem('username',response.data.name);
+                localStorage.setItem('username',response.data.name);localStorage.setItem('fund-token',response.data.token);
                 navigate('/projects');
               }
             })

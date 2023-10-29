@@ -55,6 +55,7 @@ const Projectcard = (props) => {
       .delete(`/projects/deleteproject?id=${props.project._id}`, {
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${localStorage.getItem("fund-token")}`
         },
         withCredentials: true,
       })

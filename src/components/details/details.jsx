@@ -40,7 +40,8 @@ const Details = () => {
     useEffect(() => {
       axiosinstance.get(`/projects/projectdata?projectid=${param.id}`, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `${localStorage.getItem("fund-token")}`,
           },
           withCredentials: true
         })
@@ -56,7 +57,7 @@ const Details = () => {
   return (
     <div className='edit-content'>
     <h1 style={{marginLeft:"2rem"}}> Project Details</h1>
-  <div className='old-content'> 
+  <div style={{display:"flex", justifyContent:"space-around"}}> 
   <Card sx={{ maxWidth: 845, maxHeight:945 }}>
     <CardHeader
       title={project.title}
@@ -121,8 +122,6 @@ const Details = () => {
      onClick={paying} variant="contained" color="success">
         Pay The Amount
         </Button>
-    // <Paypalpayment id={param.id} amount={amount} />
-    
   )
 }
   <div className='btn-zone'>
